@@ -7,6 +7,8 @@
 const Document = require('./Document');
 const DocumentVersion = require('./DocumentVersion');
 const DecayAnalysis = require('./DecayAnalysis');
+const DocumentChunk = require('./DocumentChunk');
+const ChatHistory = require('./ChatHistory');
 
 // Define associations
 Document.hasMany(DocumentVersion, {
@@ -29,8 +31,20 @@ DecayAnalysis.belongsTo(Document, {
     as: 'document',
 });
 
+Document.hasMany(DocumentChunk, {
+    foreignKey: 'documentId',
+    as: 'chunks',
+});
+
+DocumentChunk.belongsTo(Document, {
+    foreignKey: 'documentId',
+    as: 'document',
+});
+
 module.exports = {
     Document,
     DocumentVersion,
     DecayAnalysis,
+    DocumentChunk,
+    ChatHistory,
 };

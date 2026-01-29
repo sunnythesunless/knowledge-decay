@@ -59,6 +59,33 @@ const Document = sequelize.define('Document', {
         allowNull: true,
         field: 'verified_by',
     },
+    // AI-generated fields
+    aiSummary: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        field: 'ai_summary',
+    },
+    keyPoints: {
+        type: DataTypes.JSON,
+        defaultValue: [],
+        field: 'key_points',
+    },
+    detectedTopics: {
+        type: DataTypes.JSON,
+        defaultValue: [],
+        field: 'detected_topics',
+    },
+    // File upload metadata
+    originalFilename: {
+        type: DataTypes.STRING(500),
+        allowNull: true,
+        field: 'original_filename',
+    },
+    fileSize: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        field: 'file_size',
+    },
 }, {
     tableName: 'documents',
     indexes: [

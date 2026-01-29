@@ -17,6 +17,8 @@ const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 // Import routes
 const documentsRouter = require('./routes/documents');
 const decayRouter = require('./routes/decay');
+const uploadRouter = require('./routes/upload');
+const chatRouter = require('./routes/chat');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -58,6 +60,8 @@ app.get('/health', (req, res) => {
 // API routes
 app.use('/api/documents', documentsRouter);
 app.use('/api/decay', decayRouter);
+app.use('/api/upload', uploadRouter);
+app.use('/api/chat', chatRouter);
 
 // API info
 app.get('/api', (req, res) => {
@@ -82,6 +86,17 @@ app.get('/api', (req, res) => {
                 report: 'GET /api/decay/reports/:docId',
                 review: 'PUT /api/decay/reports/:id/review',
                 summary: 'GET /api/decay/summary',
+            },
+            upload: {
+                upload: 'POST /api/upload (multipart/form-data)',
+                supported: 'GET /api/upload/supported',
+            },
+            chat: {
+                ask: 'POST /api/chat',
+                search: 'POST /api/chat/search',
+                history: 'GET /api/chat/history',
+                feedback: 'PUT /api/chat/:id/feedback',
+                status: 'GET /api/chat/status',
             },
         },
     });
